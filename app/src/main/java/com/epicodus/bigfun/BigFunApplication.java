@@ -20,25 +20,16 @@
 
 package com.epicodus.bigfun;
 
-import android.os.Bundle;
-import android.util.Log;
-import com.facebook.FacebookBroadcastReceiver;
+import android.app.Application;
 
-/**
- * This is a simple example to demonstrate how an app could extend FacebookBroadcastReceiver to handle
- * notifications that long-running operations such as photo uploads have finished.
- */
-public class HelloFacebookBroadcastReceiver extends FacebookBroadcastReceiver {
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
+public class BigFunApplication extends Application {
     @Override
-    protected void onSuccessfulAppCall(String appCallId, String action, Bundle extras) {
-        // A real app could update UI or notify the user that their photo was uploaded.
-        Log.d("HelloFacebook", String.format("Photo uploaded by call " + appCallId + " succeeded."));
-    }
-
-    @Override
-    protected void onFailedAppCall(String appCallId, String action, Bundle extras) {
-        // A real app could update UI or notify the user that their photo was not uploaded.
-        Log.d("HelloFacebook", String.format("Photo uploaded by call " + appCallId + " failed."));
+    public void onCreate() {
+        super.onCreate();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
     }
 }
