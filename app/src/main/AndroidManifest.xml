@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.epicodus.facebookeventorganizer"
+    package="com.epicodus.bigfun"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -9,12 +9,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".HelloFacebookSampleApplication"
+        android:name="com.epicodus.bigfun.HelloFacebookSampleApplication"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar">
         <activity
-            android:name=".HelloFacebookSampleActivity"
+            android:name="com.epicodus.bigfun.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -48,7 +48,7 @@
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider355198514515820"
             android:exported="true" />
-        <receiver android:name=".HelloFacebookBroadcastReceiver">
+        <receiver android:name="com.epicodus.bigfun.HelloFacebookBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.facebook.platform.AppCallResultBroadcast" />
             </intent-filter>

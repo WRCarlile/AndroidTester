@@ -18,7 +18,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.epicodus.facebookeventorganizer;
+package com.epicodus.bigfun;
 
 import android.app.Application;
 

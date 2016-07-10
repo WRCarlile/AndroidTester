@@ -1,4 +1,4 @@
-package com.epicodus.facebookeventorganizer;
+package com.epicodus.bigfun;
 
 import org.junit.Test;
 

@@ -18,7 +18,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.epicodus.facebookeventorganizer;
+package com.epicodus.bigfun;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -34,7 +34,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.*;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.ProfilePictureView;
@@ -48,7 +47,7 @@ import com.facebook.share.widget.ShareDialog;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class HelloFacebookSampleActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity {
 
     private static final String PERMISSION = "publish_actions";
     private static final Location SEATTLE_LOCATION = new Location("") {
@@ -97,7 +96,7 @@ public class HelloFacebookSampleActivity extends FragmentActivity {
         }
 
         private void showResult(String title, String alertMessage) {
-            new AlertDialog.Builder(HelloFacebookSampleActivity.this)
+            new AlertDialog.Builder(MainActivity.this)
                     .setTitle(title)
                     .setMessage(alertMessage)
                     .setPositiveButton(R.string.ok, null)
@@ -146,7 +145,7 @@ public class HelloFacebookSampleActivity extends FragmentActivity {
                     }
 
                     private void showAlert() {
-                        new AlertDialog.Builder(HelloFacebookSampleActivity.this)
+                        new AlertDialog.Builder(MainActivity.this)
                                 .setTitle(R.string.cancelled)
                                 .setMessage(R.string.permission_not_granted)
                                 .setPositiveButton(R.string.ok, null)

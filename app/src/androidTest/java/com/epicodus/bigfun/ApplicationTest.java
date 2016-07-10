@@ -1,4 +1,4 @@
-package com.epicodus.facebookeventorganizer;
+package com.epicodus.bigfun;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
