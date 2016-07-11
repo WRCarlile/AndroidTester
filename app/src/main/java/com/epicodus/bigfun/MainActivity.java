@@ -100,7 +100,8 @@ public class MainActivity extends FragmentActivity {
                                     public void onCompleted(JSONObject object,GraphResponse response) {
                                         try {
                                             String name = object.getString("name");
-
+                                            String events =object.getString("events");
+                                            Log.d("event", events);
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -109,7 +110,7 @@ public class MainActivity extends FragmentActivity {
 
                                 });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id,name,link,gender,birthday,email");
+                        parameters.putString("fields", "id,name,link,gender,birthday,email,events");
                         request.setParameters(parameters);
                         Log.d("howdy", request.toString());
                         request.executeAsync();
