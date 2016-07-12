@@ -6,21 +6,13 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:background="#FFF"
-        >
+              android:background="#FFF">
     <LinearLayout android:orientation="vertical"
                   android:layout_width="fill_parent"
                   android:layout_height="fill_parent"
                   android:background="#FFF"
                   android:id="@+id/main_ui_container">
-        <com.facebook.login.widget.LoginButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center_horizontal"
-            facebook:com_facebook_confirm_logout="false"
-            facebook:com_facebook_tooltip_mode="never_display"
-            />
+
         <LinearLayout
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
@@ -36,15 +28,34 @@
                     android:layout_gravity="center"
                     android:textColor="#333"
                     android:textSize="18sp"/>
-            <com.facebook.login.widget.ProfilePictureView
-                    android:id="@+id/profilePicture"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    facebook:com_facebook_preset_size="normal"/>
+
 
         </LinearLayout>
+
+        <com.facebook.login.widget.ProfilePictureView
+                android:id="@+id/profilePicture"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                facebook:com_facebook_preset_size="normal"
+            android:layout_gravity="center_horizontal" />
+
+        <com.facebook.login.widget.LoginButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            facebook:com_facebook_confirm_logout="false"
+            facebook:com_facebook_tooltip_mode="never_display"
+            />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/eventList"
+            android:layout_gravity="center_horizontal"
+            android:choiceMode="singleChoice" />
     </LinearLayout>
 
 </LinearLayout>

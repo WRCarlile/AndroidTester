@@ -2,6 +2,7 @@
 package com.epicodus.bigfun;
 
 import android.app.AlertDialog;
+import android.app.usage.UsageEvents;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,10 +18,9 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.ProfilePictureView;
 import com.facebook.share.Sharer;
 import com.facebook.share.widget.ShareDialog;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,6 +40,8 @@ public class MainActivity extends FragmentActivity {
     private CallbackManager callbackManager;
     private ProfileTracker profileTracker;
     private ShareDialog shareDialog;
+    private ArrayList<UserEvents> eventArray = new ArrayList<>();
+
 
     private FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {
         @Override
@@ -84,8 +86,12 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
 
+
+
+
         callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "user_events"));
+
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("user_events"));
 
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -97,23 +103,30 @@ public class MainActivity extends FragmentActivity {
                         GraphRequest request = GraphRequest.newMeRequest( AccessToken.getCurrentAccessToken(),
                                 new GraphRequest.GraphJSONObjectCallback() {
                                     @Override
-                                    public void onCompleted(JSONObject object,GraphResponse response) {
+                                    public void onCompleted(JSONObject object, GraphResponse response) {
+
                                         try {
-                                            String name = object.getString("name");
-                                            String events =object.getString("events");
-                                            Log.d("event", events);
+                                            JSONObject events = object.getJSONObject("events");
+                                            JSONArray data = events.getJSONArray("data");
+                                            for(int i=0; i<data.length(); i++) {
+                                                JSONObject eventData = data.getJSONObject(i);
+                                                String name = eventData.getString("name");
+                                                String description = eventData.getString("description");
+
+                                                UserEvents result = new UserEvents(name, description);
+                                                eventArray.add(result);
+                                            }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
-
                                     }
 
                                 });
                         Bundle parameters = new Bundle();
                         parameters.putString("fields", "id,name,link,gender,birthday,email,events");
                         request.setParameters(parameters);
-                        Log.d("howdy", request.toString());
                         request.executeAsync();
+
                     }
 
 
