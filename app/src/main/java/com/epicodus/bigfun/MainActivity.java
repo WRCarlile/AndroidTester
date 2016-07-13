@@ -2,14 +2,14 @@
 package com.epicodus.bigfun;
 
 import android.app.AlertDialog;
-import android.app.usage.UsageEvents;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.*;
@@ -18,14 +18,14 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.ProfilePictureView;
 import com.facebook.share.Sharer;
 import com.facebook.share.widget.ShareDialog;
-
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import butterknife.Bind;
 
 public class MainActivity extends FragmentActivity {
 
@@ -40,7 +40,10 @@ public class MainActivity extends FragmentActivity {
     private CallbackManager callbackManager;
     private ProfileTracker profileTracker;
     private ShareDialog shareDialog;
-    private ArrayList<UserEvents> eventArray = new ArrayList<>();
+
+    @Bind(R.id.eventList) ListView mEventList;
+     ArrayList<UserEvents> eventArray = new ArrayList<>();
+
 
 
     private FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {
@@ -85,6 +88,12 @@ public class MainActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
+        setContentView(R.layout.main);
+        mEventList =(ListView) findViewById(R.id.eventList);
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, eventArray);
+        mEventList.setAdapter(adapter);
+
+
 
 
 
@@ -115,6 +124,7 @@ public class MainActivity extends FragmentActivity {
 
                                                 UserEvents result = new UserEvents(name, description);
                                                 eventArray.add(result);
+                                                Log.d("--------", eventArray.toString());
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -123,7 +133,7 @@ public class MainActivity extends FragmentActivity {
 
                                 });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id,name,link,gender,birthday,email,events");
+                        parameters.putString("fields", "id,name,events");
                         request.setParameters(parameters);
                         request.executeAsync();
 

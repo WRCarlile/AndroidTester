@@ -50,12 +50,14 @@
             facebook:com_facebook_tooltip_mode="never_display"
             />
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/eventList"
-            android:layout_gravity="center_horizontal"
-            android:choiceMode="singleChoice" />
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerView"
+            android:layout_below="@+id/profilePicture"
+            android:paddingBottom="15dp"
+             />
+
     </LinearLayout>
 
 </LinearLayout>
