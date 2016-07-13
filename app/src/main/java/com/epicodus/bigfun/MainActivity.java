@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends FragmentActivity {
 
@@ -93,13 +95,10 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.main);
-
-
+        ButterKnife.bind(this);
 
         callbackManager = CallbackManager.Factory.create();
-
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("user_events"));
-
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -122,13 +121,13 @@ public class MainActivity extends FragmentActivity {
                                                 UserEvents result = new UserEvents(name, description);
 
                                                 mEvents.add(result);
-                                                Log.d("--------", mEvents.toString());
                                                 mAdapter = new EventsListAdapter(getApplicationContext(), mEvents);
+                                                Log.d("---------", mRecyclerView+"");
                                                 mRecyclerView.setAdapter(mAdapter);
-//                                                RecyclerView.LayoutManager layoutManager =
-//                                                        new LinearLayoutManager(MainActivity.this);
-//                                                mRecyclerView.setLayoutManager(layoutManager);
-//                                                mRecyclerView.setHasFixedSize(true);
+                                                RecyclerView.LayoutManager layoutManager =
+                                                new LinearLayoutManager(MainActivity.this);
+                                                mRecyclerView.setLayoutManager(layoutManager);
+                                                mRecyclerView.setHasFixedSize(true);
 
                                             }
                                         } catch (JSONException e) {
