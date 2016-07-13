@@ -48,7 +48,7 @@ public class MainActivity extends FragmentActivity {
 
     private EventsListAdapter mAdapter;
 
-    public ArrayList<UserEvents> mUserEvents = new ArrayList<>();
+    public ArrayList<UserEvents> mEvents = new ArrayList<>();
 
 
 
@@ -121,11 +121,13 @@ public class MainActivity extends FragmentActivity {
                                                 JSONObject eventData = data.getJSONObject(i);
                                                 String name = eventData.getString("name");
                                                 String description = eventData.getString("description");
-
                                                 UserEvents result = new UserEvents(name, description);
-                                                mRecyclerView.setAdapter(result);
+
+                                                mEvents.add(result);
+                                                Log.d("--------", mEvents.toString());
+                                                mAdapter = new EventsListAdapter(getApplicationContext(), mEvents);
                                                 mRecyclerView.setHasFixedSize(true);
-                                                mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+                                                mRecyclerView.setAdapter(mAdapter);
 
                                             }
                                         } catch (JSONException e) {
@@ -134,6 +136,7 @@ public class MainActivity extends FragmentActivity {
                                     }
 
                                 });
+
                         Bundle parameters = new Bundle();
                         parameters.putString("fields", "id,name,events");
                         request.setParameters(parameters);

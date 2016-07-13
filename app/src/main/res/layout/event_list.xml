@@ -28,5 +28,5 @@
             android:text="eventDescription"
             android:id="@+id/eventDescription"
             android:layout_gravity="center_horizontal" />
-
+        </LinearLayout>
     </LinearLayout>
