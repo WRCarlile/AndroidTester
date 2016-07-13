@@ -50,8 +50,6 @@ public class MainActivity extends FragmentActivity {
 
     public ArrayList<UserEvents> mEvents = new ArrayList<>();
 
-
-
     private FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {
         @Override
         public void onCancel() {
@@ -126,8 +124,11 @@ public class MainActivity extends FragmentActivity {
                                                 mEvents.add(result);
                                                 Log.d("--------", mEvents.toString());
                                                 mAdapter = new EventsListAdapter(getApplicationContext(), mEvents);
-                                                mRecyclerView.setHasFixedSize(true);
                                                 mRecyclerView.setAdapter(mAdapter);
+//                                                RecyclerView.LayoutManager layoutManager =
+//                                                        new LinearLayoutManager(MainActivity.this);
+//                                                mRecyclerView.setLayoutManager(layoutManager);
+//                                                mRecyclerView.setHasFixedSize(true);
 
                                             }
                                         } catch (JSONException e) {
