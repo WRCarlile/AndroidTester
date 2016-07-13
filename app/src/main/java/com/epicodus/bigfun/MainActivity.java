@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -41,8 +43,12 @@ public class MainActivity extends FragmentActivity {
     private ProfileTracker profileTracker;
     private ShareDialog shareDialog;
 
-    @Bind(R.id.eventList) ListView mEventList;
-     ArrayList<UserEvents> eventArray = new ArrayList<>();
+    @Bind(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+
+    private EventsListAdapter mAdapter;
+
+    public ArrayList<UserEvents> mUserEvents = new ArrayList<>();
 
 
 
@@ -89,12 +95,6 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.main);
-        mEventList =(ListView) findViewById(R.id.eventList);
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, eventArray);
-        mEventList.setAdapter(adapter);
-
-
-
 
 
 
@@ -123,8 +123,10 @@ public class MainActivity extends FragmentActivity {
                                                 String description = eventData.getString("description");
 
                                                 UserEvents result = new UserEvents(name, description);
-                                                eventArray.add(result);
-                                                Log.d("--------", eventArray.toString());
+                                                mRecyclerView.setAdapter(result);
+                                                mRecyclerView.setHasFixedSize(true);
+                                                mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
