@@ -103,6 +103,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.main);
         ButterKnife.bind(this);
+        mEvents = new ArrayList<>();
+        mAdapter = new EventsListAdapter(getApplicationContext(), mEvents);
+        mRecyclerView.setAdapter(mAdapter);
+
         callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("user_events"));
 
@@ -128,13 +132,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                                                 UserEvents result = new UserEvents(name, description);
 
                                                 mEvents.add(result);
-                                                mAdapter = new EventsListAdapter(getApplicationContext(), mEvents);
-                                                mRecyclerView.setAdapter(mAdapter);
-                                                Log.d("--------- check", mRecyclerView + "");
-                                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-                                                mRecyclerView.setLayoutManager(layoutManager);
-                                                mRecyclerView.setHasFixedSize(true);
+
                                             }
+                                            mAdapter = new EventsListAdapter(getApplicationContext(), mEvents);
+                                            mRecyclerView.setAdapter(mAdapter);
+                                            Log.d("--------- check", mRecyclerView + "");
+                                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+                                            mRecyclerView.setLayoutManager(layoutManager);
+                                            mRecyclerView.setHasFixedSize(true);
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -236,6 +241,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         if (enableButtons && profile != null) {
             profilePictureView.setProfileId(profile.getId());
             greeting.setText(getString(R.string.hello_user, profile.getFirstName()));
+
 
 
         } else {
