@@ -42,26 +42,16 @@
             />
 
         <Button
-            android:id="@+id/postStatusUpdateButton"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="Post Status Update"
-            />
-        <Button
-            android:id="@+id/postPhotoButton"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="Post Photo"
-            />
-        <Button
             android:id="@+id/getInterestsButton"
             android:layout_width="@dimen/button_width"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:text="Get Interests !!"
+            android:text="Get Events"
             />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </LinearLayout>
