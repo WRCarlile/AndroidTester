@@ -24,7 +24,6 @@
                     android:id="@+id/greeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
                     android:textColor="#333"
                     android:textSize="18sp"/>
@@ -50,14 +49,19 @@
             facebook:com_facebook_tooltip_mode="never_display"
             />
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
+
+
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@android:color/black" />
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_below="@+id/profilePicture"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

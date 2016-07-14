@@ -31,7 +31,7 @@ import java.util.Arrays;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements View.OnClickListener{
 
     private static final String PERMISSION = "user_events";
 
@@ -86,6 +86,13 @@ public class MainActivity extends FragmentActivity {
         }
     };
 
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(MainActivity.this, EventsListActivity.class );
+        startActivity(intent);
+
+    }
+
     private enum PendingAction {
         NONE,
     }
@@ -96,9 +103,9 @@ public class MainActivity extends FragmentActivity {
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.main);
         ButterKnife.bind(this);
-
         callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("user_events"));
+
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -122,13 +129,11 @@ public class MainActivity extends FragmentActivity {
 
                                                 mEvents.add(result);
                                                 mAdapter = new EventsListAdapter(getApplicationContext(), mEvents);
-                                                Log.d("---------", mRecyclerView+"");
                                                 mRecyclerView.setAdapter(mAdapter);
-                                                RecyclerView.LayoutManager layoutManager =
-                                                new LinearLayoutManager(MainActivity.this);
+                                                Log.d("--------- check", mRecyclerView + "");
+                                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
                                                 mRecyclerView.setLayoutManager(layoutManager);
                                                 mRecyclerView.setHasFixedSize(true);
-
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -196,6 +201,7 @@ public class MainActivity extends FragmentActivity {
         profilePictureView = (ProfilePictureView) findViewById(R.id.profilePicture);
         greeting = (TextView) findViewById(R.id.greeting);
 
+
     }
 
     @Override
@@ -230,6 +236,8 @@ public class MainActivity extends FragmentActivity {
         if (enableButtons && profile != null) {
             profilePictureView.setProfileId(profile.getId());
             greeting.setText(getString(R.string.hello_user, profile.getFirstName()));
+
+
         } else {
             profilePictureView.setProfileId(null);
             greeting.setText(null);
